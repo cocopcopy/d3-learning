@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Three Little Circles</title>
+</head>
+
+<body>
+    <svg width="720" height="120">
+        <circle cx="40" cy="60" r="10"></circle>
+        <circle cx="80" cy="60" r="10"></circle>
+        <circle cx="120" cy="60" r="10"></circle>
+    </svg>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+
+        let update = d3.select("svg").selectAll("circle")
+            .data([32, 233, 574], d => d);
+
+        let enter = update.enter().append("circle");
+        update.merge(enter).attr("cy", 60)
+            .attr("cx", (d, i) => i * 100 + 30)
+            .attr("r", d => Math.sqrt(d));
+
+        update.exit().remove();
+
+        update.enter().append("circle")
+            .attr("r", 10)
+            .transition()
+            .attr("r", 500);
+
+
+    </script>
+</body>
+
+</html>
